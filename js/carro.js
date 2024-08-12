@@ -1,14 +1,22 @@
-// Obtener referencias a los elementos del DOM
+
 const carritoModal = document.getElementById('cartModal');
 const buyItems = document.getElementById('buyItems');
 const sumPrices = document.getElementById('sum-prices');
 const checkoutButton = document.querySelector('.checkout');
 const emptyMessage = document.querySelector('.empty');
 
-// Variable global para el carrito
-let carrito = [];
+let carrito = [{ id: 1, title: "Collar Iniciales", category: "Collares", price: 19000, img: "./img/img1.png" },
+    { id: 2, title: "Pulsera 3 circulos", category: "Pulseras", price: 66000, img: "./img/img2.png" },
+    { id: 3, title: "Aretes circulos multifunción", category: "Aretes", price: 50000, img: "./img/img3.png" },
+    { id: 4, title: "Earcuf Circulos", category: "Aretes", price: 36000, img: "./img/img4.png" },
+    { id: 5, title: "Aretes Murralla", category: "Aretes", price: 50000, img: "./img/img5.png" },
+    { id: 6, title: "Topos Flor con Murralla", category: "Aretes", price: 31000, img: "./img/img6.png" },
+    { id: 7, title: "Topos Monstera con Murralla", category: "Aretes", price: 31000, img: "./img/img7.png" },
+    { id: 8, title: "Topos Circulos textura con Murralla", category: "Aretes", price: 31000, img: "./img/img8.png" },
+    { id: 9, title: "Aretes Monstera Fiigrana", category: "Aretes", price: 100000, img: "./img/img9.png" },
+    { id: 10, title: "Aretes Filigrana loros con murralla", category: "Aretes", price: 70000, img: "./img/img10.png" }];
 
-// Cargar carrito desde localStorage
+
 function cargarCarrito() {
     const carritoGuardado = localStorage.getItem('carrito');
     carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
@@ -42,7 +50,7 @@ function actualizarCarritoUI() {
             buyItems.appendChild(li);
         });
 
-        // Actualizar el total de precios
+      
         const total = carrito.reduce((acc, item) => acc + item.price * item.cantidad, 0);
         sumPrices.innerText = `Total: $${total}`;
     } else {
@@ -52,7 +60,7 @@ function actualizarCarritoUI() {
     }
 }
 
-// Añadir producto al carrito
+
 function agregarProducto(productoId) {
     const producto = catalogo.find(item => item.id === productoId);
 
@@ -78,14 +86,14 @@ buyItems.addEventListener('click', function (e) {
     }
 });
 
-// Vaciar carrito
+
 function vaciarCarrito() {
     carrito = [];
     guardarCarrito();
     actualizarCarritoUI();
 }
 
-// Función para el checkout
+
 function finalizarCompra() {
     const nombre = prompt("Ingrese su nombre:");
     const direccion = prompt("Ingrese su dirección:");
@@ -96,7 +104,7 @@ function finalizarCompra() {
     vaciarCarrito();
 }
 
-// Eventos
+
 document.addEventListener('DOMContentLoaded', cargarCarrito);
 
 document.querySelectorAll('.addToCart').forEach(btn => {
